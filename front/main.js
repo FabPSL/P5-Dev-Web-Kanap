@@ -1,6 +1,8 @@
+"use strict";
 //http://localhost:3000/api/products
 
 let display = "";
+const items = document.getElementById("items");
 
 fetch("http://localhost:3000/api/products")
   .then((response) => {
@@ -8,8 +10,8 @@ fetch("http://localhost:3000/api/products")
       return response.json();
     }
   })
-  .then((value) => {
-    value.forEach((element) => {
+  .then((elements) => {
+    elements.forEach((element) => {
       display += ` <a href="./product.html?id=${element._id}">
                     <article>
                         <img src="${element.imageUrl}" alt="${element.altTxt}">
@@ -18,9 +20,8 @@ fetch("http://localhost:3000/api/products")
                     </article>
                     </a>`;
     });
-    items = document.getElementById("items");
     items.innerHTML = display;
   })
   .catch((error) => {
-    products.innerHTML = `(${error})`;
+    items.innerHTML = `(${error})`;
   });
