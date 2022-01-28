@@ -4,6 +4,8 @@ const title = document.getElementById("title");
 const price = document.getElementById("price");
 const description = document.getElementById("description");
 const colors = document.getElementById("colors");
+const quantity = document.getElementById("quantity");
+const addToCart = document.getElementById("addToCart");
 console.log(colors);
 
 //Récupération de l'ID du produit
@@ -15,7 +17,7 @@ const urlFetch = "http://localhost:3000/api/products/" + id;
 
 //Interrogation de l'API pour le produit
 fetch(urlFetch)
-  //Sinon reponse ok, retour au format json
+  //Si reponse ok, retour au format json
   .then((response) => {
     if (response.ok) {
       return response.json();
@@ -30,4 +32,10 @@ fetch(urlFetch)
     price.innerHTML = `${element.price}`;
     description.innerHTML = `${element.description}`;
     description.innerHTML = `${element.description}`;
+    //insérer couleurs de l'API
+    for (let i = 0; i < element.colors.length; i++) {
+      colors.innerHTML += `<option value = "${element.colors[i]}"> ${element.colors[i]} </option>`;
+    }
   });
+
+//Stockage du produit choisi
